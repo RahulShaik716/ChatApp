@@ -3,8 +3,8 @@ import { useState } from "react";
 import { io } from "socket.io-client";
 import { useAuth } from "../Context/AuthContext";
 import Users from "./Users";
-require("dotenv").config();
-const socket = io(process.env.backend_url);
+const backend_url = import.meta.env.VITE_backend_url;
+const socket = io(backend_url);
 export const Chat = () => {
   const { token } = useAuth();
   const [message, setMessage] = useState("");
