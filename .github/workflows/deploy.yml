@@ -35,4 +35,4 @@ jobs:
           npm install -g vercel
 
           # Deploy to Vercel using the CLI
-          vercel --prod --token=$VERCEL_TOKEN --confirm
+          vercel --prod --token=$VERCEL_TOKEN --yes
