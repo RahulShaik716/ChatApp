@@ -10,17 +10,37 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    setToken({ token: data.token, username: data.username });
+    setToken({ token: data.token, username: data.username, photo: data.photo });
     localStorage.setItem("token", data.token);
     localStorage.setItem("username", data.username);
-    console.log(data.username);
+    localStorage.setItem("avatar", data.photo);
+    if (data.username) return true;
+    else return false;
   };
-  const register = async (username, password) => {
-    await fetch(`${backend_url}/api/auth/register`, {
+  const register = async (username, password, avatar) => {
+    let avatarBase64 = "";
+    if (avatar) {
+      const reader = new FileReader();
+      reader.readAsDataURL(avatar);
+      await new Promise((resolve) => {
+        reader.onload = () => {
+          avatarBase64 = reader.result; // Set the base64 image string
+          resolve();
+        };
+      });
+    }
+    const res = await fetch(`${backend_url}/api/auth/register`, {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        avatar: avatarBase64,
+      }),
     });
+    console.log(res);
+    if (res.status == 201) return true;
+    else return false;
   };
   return (
     <AuthContext.Provider value={{ token, login, register }}>

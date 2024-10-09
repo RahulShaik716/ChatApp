@@ -5,7 +5,6 @@ import PrivateRoute from "./Components/PrivateRoute";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import { AuthProvider } from "./Context/AuthContext";
-
 function App() {
   return (
     <AuthProvider>

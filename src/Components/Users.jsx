@@ -1,6 +1,8 @@
+import Sidebar from "./Sidebar";
+
 function Users({ onlineUsers, selectedUser, setSelectedUser }) {
   return (
-    <div className="sidebar">
+    <Sidebar>
       <h2> Online Users </h2>
       <ul>
         {onlineUsers.map((user) => (
@@ -17,7 +19,7 @@ function Users({ onlineUsers, selectedUser, setSelectedUser }) {
           </li>
         ))}
       </ul>
-    </div>
+    </Sidebar>
   );
 }
 export default Users;
